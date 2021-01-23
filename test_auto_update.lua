@@ -1,8 +1,8 @@
-script_name('Autoupdate script') -- название скрипта
-script_author('FORMYS') -- автор скрипта
-script_description('Autoupdate') -- описание скрипта
+script_name('Autoupdate script') -- РЅР°Р·РІР°РЅРёРµ СЃРєСЂРёРїС‚Р°
+script_author('FORMYS') -- Р°РІС‚РѕСЂ СЃРєСЂРёРїС‚Р°
+script_description('Autoupdate') -- РѕРїРёСЃР°РЅРёРµ СЃРєСЂРёРїС‚Р°
 
-require "lib.moonloader" -- подключение библиотеки
+require "lib.moonloader" -- РїРѕРґРєР»СЋС‡РµРЅРёРµ Р±РёР±Р»РёРѕС‚РµРєРё
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 local keys = require "vkeys"
@@ -16,10 +16,10 @@ update_state = false
 local script_vers = 1
 local script_vers_text = "1.00"
 
-local update_url = "https://raw.githubusercontent.com/bottomtext228/bomjnet/main/update.ini" -- тут тоже свою ссылку
-local update_path = getWorkingDirectory() .. "/update.ini" -- и тут свою ссылку
+local update_url = "https://raw.githubusercontent.com/bottomtext228/bomjnet/main/update.ini" -- С‚СѓС‚ С‚РѕР¶Рµ СЃРІРѕСЋ СЃСЃС‹Р»РєСѓ
+local update_path = getWorkingDirectory() .. "/update.ini" -- Рё С‚СѓС‚ СЃРІРѕСЋ СЃСЃС‹Р»РєСѓ
 
-local script_url = "https://github.com/thechampguess/scripts/blob/master/autoupdate_lesson_16.luac?raw=true" -- тут свою ссылку
+local script_url = "https://github.com/thechampguess/scripts/blob/master/autoupdate_lesson_16.luac?raw=true" -- С‚СѓС‚ СЃРІРѕСЋ СЃСЃС‹Р»РєСѓ
 local script_path = thisScript().path
 
 
@@ -35,8 +35,8 @@ function main()
     downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
-            if tonumber(updateIni.info.vers) > script_vers then
-                sampAddChatMessage("Есть обновление! Версия: " .. updateIni.info.vers_text, -1)
+            if tonumber(updateIni.updatefile.vers) > script_vers then
+                sampAddChatMessage("Р•СЃС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ! Р’РµСЂСЃРёСЏ: " .. updateIni.updatefile.vers_text, -1)
                 update_state = true
             end
             os.remove(update_path)
@@ -49,7 +49,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    sampAddChatMessage("Скрипт успешно обновлен!", -1)
+                    sampAddChatMessage("РЎРєСЂРёРїС‚ СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»РµРЅ!", -1)
                     thisScript():reload()
                 end
             end)
@@ -60,5 +60,5 @@ function main()
 end
 
 function cmd_update(arg)
-    sampShowDialog(1000, "Автообновление v2.0", "{FFFFFF}Это урок по обновлению\n{FFF000}Новая версия", "Закрыть", "", 0)
+    sampShowDialog(1000, "РђРІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ v2.0", "{FFFFFF}Р­С‚Рѕ СѓСЂРѕРє РїРѕ РѕР±РЅРѕРІР»РµРЅРёСЋ\n{FFF000}РќРѕРІР°СЏ РІРµСЂСЃРёСЏ", "Р—Р°РєСЂС‹С‚СЊ", "", 0)
 end
